@@ -357,6 +357,14 @@ function render(){
   if(!didInit || !SITES.find(s=>s.id===curSite)){
     didInit = true; curSite = firstUsefulSite(); curLib = "";
   }
+  /* 開くライブラリをここで確定させる（左メニューの選択状態と注釈の位置を合わせるため） */
+  if(!LIBS.some(l=>l.site===curSite && l.key===curLib && canSee(l))){
+    const cands = LIBS.filter(l=>l.site===curSite && canSee(l));
+    const pick = cands.find(l=>FILES.some(f=>f[1]===l.key))
+              || cands.find(l=>((FOLDERS[curSite]||{})[l.key]||[]).length)
+              || cands[0];
+    curLib = pick ? pick.key : "";
+  }
   /* ハブナビ（権限が無いサイトはリンクごと非表示＝本番のナビ対象ユーザー設定と同じ挙動） */
   document.getElementById("hubnav").innerHTML =
     `<div class="hubname" style="cursor:pointer" onclick="selSite('portal')"><span class="tile">SC</span>サンプル株式会社 ポータル</div>` +
@@ -497,32 +505,60 @@ document.addEventListener("click", e=>{ if(!e.target.closest("th") && openMenu){
    非表示時は一切描画しないため、通常のデモ画面には影響しません
    ============================================================ */
 const GUIDE = [
-  { n:"①", sel:".suite .brand", at:"r",
-    t:"Microsoft 365 スイートバー",
-    d:"SharePoint 共通のヘッダー。検索・通知・アカウント" },
+  { n:"①", sel:".planbar", at:"l", hl:".planbar",
+    t:"構成方式の切替",
+    d:{A:"いまは方式A。タブでB・Cに切り替えると、権限も人もそのままに構造だけが変わります",
+       B:"いまは方式B。方式Aと行き来して、同じ資料の置き場所がどう変わるかを比べてください",
+       C:"いまは方式C。方式Bから、文書が1件もない中分類28本を除いたものです"} },
   { n:"②", sel:"#hubnav .hublink.on", at:"tl", hl:"#hubnav",
-    t:"業務区分サイト（第1階層）",
-    d:"13サイト。権限のないサイトはここに出ません" },
+    t:"サイト（第1階層）",
+    d:{A:"業務区分13サイト。分類体系の大分類とは対応していません",
+       B:"大分類14サイト。F01〜F14 とそのまま1対1で対応します",
+       C:"大分類14サイト。方式Bと同じです"} },
   { n:"③", sel:".sh-row .sitetile", at:"l", hl:".sh-row",
     t:"サイトヘッダー",
-    d:"開いているサイトと、アクセスできる人数" },
+    d:{A:"開いているサイトと、アクセスできる人数",
+       B:"サイト名の先頭が大分類コードです",
+       C:"サイト名の先頭が大分類コードです"} },
   { n:"④", sel:"#quick .qi.on", at:"l", hl:"#quick",
     t:"ライブラリ（第2階層）",
-    d:"業務カテゴリ単位。L4 は一般社員には出ません" },
+    d:{A:"各部署のフォルダ名がそのまま。92本。中分類は列でしか持ちません",
+       B:"ライブラリ＝中分類そのもの。104本。1:N が構造で保証されます",
+       C:"ライブラリ＝中分類。文書があるものだけ76本"} },
   { n:"⑤", sel:".doclist tr.fld td:nth-child(2)", at:"l",
     t:"フォルダ（第3階層）",
-    d:"現行のフォルダ構成をそのまま反映" },
+    d:{A:"現行のフォルダ構成をそのまま反映しています",
+       B:"現場の呼び名。別部署の同じ業務も、ここに並びます",
+       C:"現場の呼び名。別部署の同じ業務も、ここに並びます"} },
   { n:"⑥", sel:".doclist th:nth-child(3)", at:"tl",
-    hlAll:".doclist th:nth-child(3),.doclist th:nth-child(4),.doclist th:nth-child(5),.doclist th:nth-child(6)",
+    hlAll:".doclist th:nth-child(3),.doclist th:nth-child(4),.doclist th:nth-child(6)",
     t:"列（メタデータ）",
-    d:"F分類・機密レベル・公開範囲・年度。▼で絞り込み" },
-  { n:"⑦", sel:".cmdbar", at:"l",
+    d:{A:"F分類・機密レベル・年度。▼で絞り込めます",
+       B:"F分類・機密レベル・年度。▼で絞り込めます",
+       C:"F分類・機密レベル・年度。▼で絞り込めます"} },
+  { n:"⑦", sel:".doclist th:nth-child(5)", at:"tl",
+    t:"公開範囲",
+    d:{A:"見られる部署の一覧。先頭が主管部署で、そこだけが更新できます",
+       B:"統合された部署が並びます。機密レベルは厳しい方へ引き上がります",
+       C:"統合された部署が並びます。機密レベルは厳しい方へ引き上がります"} },
+  { n:"⑧", sel:".cmdbar", at:"l",
     t:"コマンドバー",
-    d:"閲覧のみの権限では［新規］［アップロード］が出ません" },
-  { n:"⑧", sel:"#avatar", at:"l",
+    d:{A:"閲覧のみの権限では［新規］［アップロード］が出ません",
+       B:"閲覧のみの権限では［新規］［アップロード］が出ません",
+       C:"閲覧のみの権限では［新規］［アップロード］が出ません"} },
+  { n:"⑨", sel:"#avatar", at:"l",
     t:"表示ユーザー",
-    d:"クリックで切替。権限による見え方を比較できます" },
+    d:{A:"クリックで部署を切替。権限のないものは鍵ではなく一覧から消えます",
+       B:"クリックで部署を切替。権限のないものは鍵ではなく一覧から消えます",
+       C:"クリックで部署を切替。権限のないものは鍵ではなく一覧から消えます"} },
 ];
+/* いまの方式に合わせて説明文を差し替える */
+const guideItems = () => GUIDE.map(g => ({...g, d: (typeof g.d === "string" ? g.d : g.d[curPlan]) }));
+const GUIDE_LEAD = {
+  A:"サイト（業務区分）→ ライブラリ（部署のフォルダ名）→ フォルダ の3階層です",
+  B:"サイト（大分類）→ ライブラリ（中分類）→ フォルダ（現場の呼び名）の3階層です",
+  C:"サイト（大分類）→ ライブラリ（中分類）→ フォルダ（現場の呼び名）の3階層です",
+};
 
 let guideOn = ["1","true","on"].includes((new URLSearchParams(location.search).get("guide")||"").toLowerCase());
 
@@ -542,13 +578,13 @@ function drawGuideInner(){
   const lg = document.createElement("div");
   lg.className = "g-legend";
   lg.innerHTML = `<div class="g-hd"><b>画面の見方</b>
-      <span>サイト（業務区分）→ ライブラリ（業務カテゴリ）→ フォルダ の3階層です</span>
+      <span>${GUIDE_LEAD[curPlan]}</span>
       <span class="g-x" onclick="toggleGuide()">解説を閉じる（G キー）</span></div>
-    <div class="g-grid">${GUIDE.map(g=>
+    <div class="g-grid">${guideItems().map(g=>
       `<div class="g-it"><i>${g.n}</i><div><b>${g.t}</b><p>${g.d}</p></div></div>`).join("")}</div>`;
   document.body.appendChild(lg);
 
-  GUIDE.forEach(g=>{
+  guideItems().forEach(g=>{
     const el = document.querySelector(g.sel);
     if(!el) return;
     const tgt = (g.hlAll || g.hl) ? [...document.querySelectorAll(g.hlAll || g.hl)] : [el];
