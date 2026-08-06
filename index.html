@@ -155,7 +155,9 @@
 .planbar .pb.on b{color:#0078d4}
 .planbar .pb em{font-size:11px;color:#797775;font-style:normal;margin-top:2px}
 .planbar .pb-note{display:flex;align-items:center;margin-left:auto;font-size:11.5px;color:#605e5c;
-  padding-left:18px;text-align:right;line-height:1.45}
+  padding-left:18px;text-align:right;line-height:1.45;max-width:38%}
+@media (max-width:1180px){ .planbar .pb-note{display:none} }
+@media (max-width:900px){ .planbar .pb em{display:none} .planbar{min-height:44px} }
 </style>
 </head>
 <body>
