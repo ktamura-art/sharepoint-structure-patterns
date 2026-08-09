@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>各部署の意向の反映状況 | SharePoint 構成 v3.4</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Yu Gothic UI","Meiryo",system-ui,sans-serif;background:#faf9f8;color:#323130;font-size:14px}
+.top{background:#000;color:#fff;padding:10px 24px;display:flex;align-items:center;gap:14px}
+.top b{font-size:16px;font-weight:600}
+.top a{color:#9fd3ff;font-size:12.5px;text-decoration:none;margin-left:auto}
+.top a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px}
+h1{font-size:21px;font-weight:600;color:#242424;margin:6px 0 4px}
+.sub{color:#605e5c;font-size:12.5px;margin-bottom:18px;line-height:1.6}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:22px}
+.tile{background:#fff;border:1px solid #e1dfdd;border-radius:4px;padding:12px 14px}
+.tile .n{font-size:26px;font-weight:700}
+.tile .l{font-size:12px;color:#605e5c;margin-top:2px;line-height:1.4}
+.sec{font-size:15px;font-weight:600;color:#242424;margin:26px 0 8px;padding-left:10px;border-left:4px solid #0078d4}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e1dfdd;font-size:12.5px}
+th{background:#f3f2f1;text-align:left;padding:8px 10px;border-bottom:2px solid #e1dfdd;font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #edebe9;vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+.b{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.b1{background:#dff6dd;color:#107c10}.b2{background:#fff4ce;color:#797673}
+.b3{background:#fde7e9;color:#a4262c}.b4{background:#deecf9;color:#005a9e}
+.num{font-weight:700}
+.note{background:#fff4ce;border:1px solid #f0e3a1;border-radius:4px;padding:12px 16px;margin:18px 0;font-size:12.5px;line-height:1.7}
+.note b{color:#8a6d00}
+.gray{color:#8a8886}
+.foot{margin-top:28px;font-size:11.5px;color:#8a8886;line-height:1.7}
+@media(max-width:760px){.wrap{padding:14px}th,td{padding:6px 7px;font-size:11.5px}}
+</style>
+</head>
+<body>
+<div class="top"><b>SharePoint 構成方式の比較</b><span style="font-size:12px;color:#c8c6c4">2ページ目｜反映状況</span>
+<a href="index.html">← デモ画面へ戻る</a></div>
+<div class="wrap">
+
+<h1>各部署の意向の反映状況（設計 v3.4 時点）</h1>
+<div class="sub">各部署からご提出いただいたサイト構成案・フォルダ構成案・権限のご記入が、設計v3.4とデモにどこまで反映されているかの一覧です。
+「入っていないものは入っていない」と分かるよう、未反映も含めて記載しています。｜2026-08-10 更新</div>
+
+<div class="tiles">
+<div class="tile"><div class="n">11<span style="font-size:14px">部署</span></div><div class="l">構成案のご提出（全部署）</div></div>
+<div class="tile"><div class="n" style="color:#107c10">650<span style="font-size:14px">行</span></div><div class="l">中分類コード付きで反映済<br>（管理本部・情シス・ISO）</div></div>
+<div class="tile"><div class="n" style="color:#a4262c">837<span style="font-size:14px">行</span></div><div class="l">未割当（コード無しの詳細行。<br>移行対応表で解消予定）</div></div>
+<div class="tile"><div class="n" style="color:#a4262c">1,130<span style="font-size:14px">件</span></div><div class="l">権限（参照）のご記入。<br>公開範囲へは未反映 → 確認方式で回収</div></div>
+</div>
+
+<div class="sec">部署別の反映状況</div>
+<table>
+<tr><th>部署</th><th>フォルダ構成の反映</th><th>状態</th><th>権限（参照）のご記入</th><th>次のアクション</th></tr>
+<tr><td><b>情報システム部</b></td><td>詳細175行を<b>すべて反映</b>（中分類コード付きでご提出いただいた分）</td><td><span class="b b1">◎ ほぼ全反映</span></td><td class="num">207行</td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
+<tr><td><b>管理本部</b></td><td>1,250行中 <b>458行を反映</b>。792行は中分類コードが無く未割当（7/10版「別案」シート）</td><td><span class="b b2">○ 部分反映</span></td><td class="gray">記入なし</td><td>未割当792行は移行対応表と併せて解消／公開範囲は説明会で確認</td></tr>
+<tr><td><b>ISO管理室</b></td><td>62行中17行を反映。45行未割当</td><td><span class="b b2">△ 一部</span></td><td class="num">4行</td><td>未割当45行の中分類を確認</td></tr>
+<tr><td><b>生産部</b></td><td>第2階層まで反映（要約レベル）。構成案の深い階層は未取込</td><td><span class="b b2">△ 要約</span></td><td class="num">137行<br><span class="gray">保全86・WPS73・技術70 ほか</span></td><td><b>★ご記入の公開先（保全・WPS・技術部 等）が現在の公開範囲に未反映。</b>確認シートで反映内容をご確認いただく</td></tr>
+<tr><td><b>サービス部</b></td><td><b>推測フォルダのまま</b>（構成案7/8受領済・詳細未取込）</td><td><span class="b b3">× 未反映</span></td><td class="num">150行</td><td>構成案の詳細をv3.4へ取込（移行対応表と併せて）</td></tr>
+<tr><td><b>技術部</b></td><td><b>推測フォルダのまま</b>（構成案7/3受領済・詳細未取込）</td><td><span class="b b3">× 未反映</span></td><td class="num">117行</td><td>同上</td></tr>
+<tr><td><b>業務部</b></td><td><b>推測フォルダのまま</b>（構成案受領済・詳細未取込）</td><td><span class="b b3">× 未反映</span></td><td class="num">2行</td><td>同上</td></tr>
+<tr><td><b>購買室</b></td><td>第2階層まで反映。7/15版の差分は未取込</td><td><span class="b b2">△ 要約</span></td><td class="num">56行</td><td>7/15版の差分確認＋公開範囲の確認</td></tr>
+<tr><td><b>営業部</b></td><td>第2階層まで反映（7/30ご指摘の4分割も反映済）</td><td><span class="b b2">△ 要約</span></td><td class="gray">記入なし</td><td>公開範囲は説明会で確認</td></tr>
+<tr><td><b>経理部</b></td><td>第2階層まで反映（会計期・事業会社の階層は列で表現予定）</td><td><span class="b b2">△ 要約</span></td><td class="gray">記入なし</td><td>同上</td></tr>
+<tr><td><b>改善推進室</b></td><td>第2階層まで反映</td><td><span class="b b2">△ 要約</span></td><td class="num">4行</td><td>同上</td></tr>
+</table>
+
+<div class="note"><b>★ 生産部をはじめ5部署の「権限（参照）」のご記入（計1,130件）は、公開範囲にまだ反映していません。</b><br>
+現在の公開範囲は「そのライブラリに文書を持つ部署」から機械的に置いた暫定値です。すでにご記入いただいた内容を
+もう一度ゼロからお聞きすることはせず、「ご記入内容をこう反映します」という<b>確認形式</b>でお返しします。</div>
+
+<div class="sec">ご記入いただいた公開先の内訳（1,130件）</div>
+<table>
+<tr><th>種類</th><th>件数</th><th>例</th><th>設計上の受け皿</th></tr>
+<tr><td>役割</td><td class="num">568（50%）</td><td>部署全員／エリア責任者／工場責任者／サービス統括</td><td>SG-L4・横断・特例の宣言リスト（器は設計済・割当はこれから）</td></tr>
+<tr><td>部署</td><td class="num">409（36%）</td><td>生産部／技術部／営業部</td><td>そのまま公開範囲へ反映可能</td></tr>
+<tr><td>課・室・PJ</td><td class="num">115（10%）</td><td>保全／生産管理室／安全衛生PJ</td><td>課グループを作るか、部署単位に丸めるかをご相談</td></tr>
+<tr><td>曖昧</td><td class="num">38（3%）</td><td>「関係部署」「各部」</td><td><span class="b b3">要確認</span> 誰を指すか、ご記入部署に確認が必要</td></tr>
+</table>
+
+<div class="sec">未反映分の解消の進め方（8/7ご確認の段取り）</div>
+<table>
+<tr><th>対象</th><th>解消方法</th><th>時期</th></tr>
+<tr><td>フォルダの未割当837行・推測フォルダ3部署</td><td>御社作成の<b>移行対応表（ファイルサーバー→サイト/ライブラリ/フォルダ）を「正」</b>として一括反映。二重作業を避けるため個別対応はしません</td><td>対応表の受領後、順次</td></tr>
+<tr><td>権限（参照）1,130件</td><td>部署別の<b>確認シート</b>（ご記入内容→反映後の公開範囲）をお返しし、確認いただいたものから反映</td><td>説明会〜8月末</td></tr>
+<tr><td>公開範囲が未記入の6部署</td><td>説明会（8/12・8/18）で自部署のライブラリの公開範囲をご確認いただく</td><td>8/12〜8/18</td></tr>
+</table>
+
+<div class="foot">
+本ページのデータはすべてサンプル用に匿名化した設計情報です。｜
+<a href="index.html" style="color:#0078d4">デモ画面（1ページ目）へ戻る</a>
+</div>
+</div>
+</body>
+</html>
