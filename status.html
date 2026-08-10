@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>各部署の意向の反映状況 | SharePoint 構成 v3.4</title>
+<title>各部署の意向の反映状況 | SharePoint 構成 v3.5</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Yu Gothic UI","Meiryo",system-ui,sans-serif;background:#faf9f8;color:#323130;font-size:14px}
@@ -39,40 +39,54 @@ tr:last-child td{border-bottom:none}
 <a href="index.html">← デモ画面へ戻る</a></div>
 <div class="wrap">
 
-<h1>各部署の意向の反映状況（設計 v3.4 時点）</h1>
-<div class="sub">各部署からご提出いただいたサイト構成案・フォルダ構成案・権限のご記入が、設計v3.4とデモにどこまで反映されているかの一覧です。
-「入っていないものは入っていない」と分かるよう、未反映も含めて記載しています。｜2026-08-10 更新（8/9ご提供の更新資料〈最新版一式〉と突合済み）</div>
+<h1>各部署の意向の反映状況（設計 v3.5 時点）</h1>
+<div class="sub">各部署の文書分類・フォルダ構成案・権限のご記入が、設計v3.5とデモにどこまで反映されているかの一覧です。
+「入っていないものは入っていない」と分かるよう、未反映も含めて記載しています。｜2026-08-11 更新
+<b>（共通文書管理体系 rev9「分類（文書別）」を全面反映）</b></div>
+
+<div class="note" style="background:#e9f4eb;border-color:#b7ddc0">
+<b>■ v3.5での変更：分類データの入力元を rev9 に一本化しました。</b><br>
+v3.4までは各部署の構成案から中分類コードを個別に拾っていたため、650行しか取り込めず837行が未割当のままでした。
+rev9 に<b>全12部署・1,945行の「分類（文書別）」シート</b>が存在することが判明したため、入力をこれに一本化しています。
+<b>未割当837行は解消しました。</b>rev9 に登録の無い分だけを各部署の構成案で補完し、下表の「出所」で区別しています。</div>
 
 <div class="tiles">
-<div class="tile"><div class="n">11<span style="font-size:14px">部署</span></div><div class="l">構成案のご提出（全部署）</div></div>
-<div class="tile"><div class="n" style="color:#107c10">650<span style="font-size:14px">行</span></div><div class="l">中分類コード付きで反映済<br>（管理本部・情シス・ISO）</div></div>
-<div class="tile"><div class="n" style="color:#a4262c">837<span style="font-size:14px">行</span></div><div class="l">未割当（コード無しの詳細行。<br>移行対応表で解消予定）</div></div>
+<div class="tile"><div class="n">12<span style="font-size:14px">部署</span></div><div class="l">rev9で中分類コード付与済<br>（全部署・漏れなし）</div></div>
+<div class="tile"><div class="n" style="color:#107c10">1,945<span style="font-size:14px">行</span></div><div class="l">rev9「分類（文書別）」から反映<br>（取込率100%）</div></div>
+<div class="tile"><div class="n" style="color:#107c10">1,225<span style="font-size:14px">本</span></div><div class="l">フォルダ（v3.4は715本）<br>rev9 758＋構成案補完 481</div></div>
 <div class="tile"><div class="n" style="color:#a4262c">606<span style="font-size:14px">件</span></div><div class="l">権限（参照）のご記入（280フォルダ・7部署）。<br>公開範囲へは未反映 → 確認方式で回収</div></div>
 </div>
 
-<div class="sec">部署別の反映状況</div>
+<div class="sec">部署別の反映状況（rev9「分類（文書別）」より）</div>
 <table>
-<tr><th>部署</th><th>参考にした書類（ご提出分）</th><th>フォルダ構成の反映</th><th>状態</th><th>権限（参照）のご記入</th><th>次のアクション</th></tr>
-<tr><td><b>情報システム部</b></td><td style="font-size:11.5px">情報システムサイト構成案.xlsx<br><span class="gray">「文書分類」シート（中分類コード付き）</span></td><td>詳細175行を<b>すべて反映</b>（中分類コード付きでご提出いただいた分）</td><td><span class="b b1">◎ ほぼ全反映</span></td><td class="num">44フォルダ</td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
-<tr><td><b>管理本部</b></td><td style="font-size:11.5px">文書分類_管理本部_20260710.xlsx<br><span class="gray">＠管理本部フォルダ構成案_20260618.xlsx</span></td><td>1,250行中 <b>458行を反映</b>。792行は中分類コードが無く未割当（7/10版「別案」シート）</td><td><span class="b b2">○ 部分反映</span></td><td class="gray">記入なし</td><td>未割当792行は移行対応表と併せて解消／公開範囲は説明会で確認</td></tr>
-<tr><td><b>ISO管理室</b></td><td style="font-size:11.5px">★ISOサイト構成案（2026.7.15まで）.xlsx</td><td>62行中17行を反映。45行未割当</td><td><span class="b b2">△ 一部</span></td><td class="num">39フォルダ<br><span class="gray">★7/15版で追記</span></td><td>未割当45行の中分類を確認＋公開範囲の確認シート</td></tr>
-<tr><td><b>生産部</b></td><td style="font-size:11.5px">生産部サイト構成案.xlsx<br><span class="gray">権限は 生産部サイト構成案_権限記入案 2.xlsx</span></td><td>第2階層まで反映（要約レベル）。構成案の深い階層は未取込</td><td><span class="b b2">△ 要約</span></td><td class="num">53フォルダ<br><span class="gray">保全31・改善推進28・技術27 ほか</span></td><td><b>★ご記入の公開先（保全・改善推進室・技術部 等）が現在の公開範囲に未反映。</b>確認シートで反映内容をご確認いただく</td></tr>
-<tr><td><b>サービス部</b></td><td style="font-size:11.5px">サービス部サイト構成案_サービス管理室_20260708.xlsx</td><td>構成案（7/8版）の実フォルダ24本を取込済。中分類への割当は当社判断（暫定）</td><td><span class="b b2">○ 反映・要確認</span></td><td class="num">39フォルダ</td><td>中分類への割当は当社判断のため、確認シートでご確認いただく</td></tr>
-<tr><td><b>技術部</b></td><td style="font-size:11.5px">技術部サイト構成案_20260703.xlsx</td><td>構成案（7/3版）の実フォルダ128本を取込済。中分類への割当は当社判断（暫定）</td><td><span class="b b2">○ 反映・要確認</span></td><td class="num">52フォルダ</td><td>同上</td></tr>
-<tr><td><b>業務部</b></td><td style="font-size:11.5px">業務部サイト構成案_業務部.xlsx</td><td>構成案の実フォルダ31本を取込済。中分類への割当は当社判断（暫定）</td><td><span class="b b2">○ 反映・要確認</span></td><td class="gray">記入なし</td><td>同上</td></tr>
-<tr><td><b>購買室</b></td><td style="font-size:11.5px">購買室サイト構成案_20260715.xlsx<br><span class="gray">8/9ご提供の最新版</span></td><td>第2階層まで反映。7/15版と突合済み（構成は7/02版と同一。凡例の明確化と「発注単価マスタ＝基幹システムで参照可」の注記のみ）</td><td><span class="b b2">△ 要約</span></td><td class="num">27フォルダ</td><td>公開範囲の確認シートでご確認いただく</td></tr>
-<tr><td><b>営業部</b></td><td style="font-size:11.5px">営業部サイト構成案_20260626.xlsx</td><td>第2階層まで反映（7/30ご指摘の4分割も反映済）</td><td><span class="b b2">△ 要約</span></td><td class="gray">記入なし</td><td>公開範囲は説明会で確認</td></tr>
-<tr><td><b>経理部</b></td><td style="font-size:11.5px">経理部サイト構成案.xlsx</td><td>第2階層まで反映（会計期・事業会社の階層は列で表現予定）</td><td><span class="b b2">△ 要約</span></td><td class="gray">記入なし</td><td>同上</td></tr>
-<tr><td><b>改善推進室</b></td><td style="font-size:11.5px">WPSサイト構成案260715.xlsx</td><td>第2階層まで反映</td><td><span class="b b2">△ 要約</span></td><td class="num">26フォルダ<br><span class="gray">★7/15版で追記</span></td><td>公開範囲の確認シートでご確認いただく</td></tr>
+<tr><th>部署（rev9表記）</th><th>rev9の登録行数</th><th>使用中分類</th><th>フォルダ</th><th>状態</th><th>権限（参照）のご記入</th><th>次のアクション</th></tr>
+<tr><td><b>管理本部</b></td><td class="num">502</td><td class="num">27</td><td class="num">169</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>公開範囲は説明会（8/12・8/18）で確認</td></tr>
+<tr><td><b>経理部</b></td><td class="num">422</td><td class="num">18</td><td class="num">101</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>同上（会計期・事業会社は列で表現）</td></tr>
+<tr><td><b>技術部（生産技術）</b></td><td class="num">186</td><td class="num">19</td><td class="num">79</td><td><span class="b b1">◎ 全反映</span></td><td class="num">52フォルダ</td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
+<tr><td><b>情報システム部</b></td><td class="num">175</td><td class="num">8</td><td class="num">21</td><td><span class="b b1">◎ 全反映</span></td><td class="num">44フォルダ</td><td>同上</td></tr>
+<tr><td><b>生産部</b></td><td class="num">171</td><td class="num">25</td><td class="num">97</td><td><span class="b b1">◎ 全反映</span></td><td class="num">53フォルダ<br><span class="gray">保全31・改善推進28・技術27 ほか</span></td><td><b>★ご記入の公開先が現在の公開範囲に未反映。</b>確認シートでご確認いただく</td></tr>
+<tr><td><b>営業部</b></td><td class="num">147</td><td class="num">12</td><td class="num">14</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>公開範囲は説明会で確認</td></tr>
+<tr><td><b>業務部</b></td><td class="num">98</td><td class="num">26</td><td class="num">24</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>同上</td></tr>
+<tr><td><b>品質技術課</b></td><td class="num">75</td><td class="num">23</td><td class="num">72</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td><b>★当社は技術部として扱っています。</b>独立した部署として権限を分けるかご確認ください</td></tr>
+<tr><td><b>ISO管理室</b></td><td class="num">55</td><td class="num">12</td><td class="num">47</td><td><span class="b b1">◎ 全反映</span></td><td class="num">39フォルダ<br><span class="gray">★7/15版で追記</span></td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
+<tr><td><b>購買室</b></td><td class="num">40</td><td class="num">9</td><td class="num">22</td><td><span class="b b1">◎ 全反映</span></td><td class="num">27フォルダ</td><td>同上</td></tr>
+<tr><td><b>改善推進室（WPS）</b></td><td class="num">39</td><td class="num">7</td><td class="num">27</td><td><span class="b b1">◎ 全反映</span></td><td class="num">26フォルダ<br><span class="gray">★7/15版で追記</span></td><td>同上</td></tr>
+<tr><td><b>サービス部</b></td><td class="num">35</td><td class="num">7</td><td class="num">14</td><td><span class="b b1">◎ 全反映</span></td><td class="num">39フォルダ</td><td><b>★rev9の登録が35行と少なく、配送計画・出荷準備・配送実績がrev9側に未登録です。</b>構成案で補完していますが、rev9への追加をご検討ください</td></tr>
 </table>
 
-<div class="sec">「第2階層まで（要約）」としている理由</div>
+<div class="note"><b>★ 部署の呼び方が2通りあります。</b><br>
+rev9では「技術(生産技術)」と「品質技術課」が別部署として登録されていますが、当社設計では<b>まとめて技術部</b>として扱っています。
+権限を分ける必要がある場合はお知らせください。同様に、rev9の「経理」「営業」「業務」「システム」は、それぞれ
+「経理部」「営業部」「業務部」「情報システム部」として扱っています。</div>
+
+<div class="sec">フォルダの出所（1,225本の内訳）</div>
 <table>
-<tr><th style="width:170px">対象</th><th>理由</th><th>対応</th></tr>
-<tr><td><b>生産・購買・営業・経理・改善推進室 ほか</b></td>
-<td>構成案には3階層目以降や別シート（サイト設計_PJ・生産部纏め 等）の情報がありますが、8/7に<b>「御社作成の移行対応表を正とする」</b>と決定したため、対応表と重複する深い階層の取込を意図的に保留しています（対応表受領後に取り込むと二重作業になるため）。なお経理部の会計期・事業会社の階層は、フォルダではなく<b>列（メタデータ）で表現する設計</b>のため取り込みません。</td>
-<td>移行対応表の受領後、一括で反映します（情報システム・営業・生技から順次）。</td></tr>
+<tr><th style="width:210px">出所</th><th>本数</th><th>意味</th></tr>
+<tr><td><b>rev9「分類（文書別）」</b></td><td class="num">758</td><td>御社が中分類コードとともにご登録済み。<b>そのまま反映</b>しています</td></tr>
+<tr><td><b>★構成案からの補完</b></td><td class="num">481</td><td>rev9に登録が無いため、各部署の構成案から当社が推定して補完した分です。<span class="b b3">要確認</span></td></tr>
 </table>
+<div class="note">rev9 と構成案は<b>重複ではなく相互補完</b>の関係でした。たとえばF09-01（採用・人員計画）では、rev9側に「パート・アルバイト ＞ 技能実習生管理／申請書類管理／研修管理」、構成案側に「パート・アルバイト ＞ 媒体管理／選考管理／面接管理」があり、同じ親フォルダの別の子をそれぞれが持っています。
+一方 F13-05（庶務・社内イベント）はrev9側が0本で、構成案の28本だけが受け皿になっています。</div>
 
 <div class="note"><b>★ 7部署の「権限（参照）」のご記入（280フォルダ・のべ606件）は、公開範囲にまだ反映していません。</b><br>
 現在の公開範囲は「そのライブラリに文書を持つ部署」から機械的に置いた暫定値です。すでにご記入いただいた内容を
@@ -90,7 +104,8 @@ tr:last-child td{border-bottom:none}
 <div class="sec">未反映分の解消の進め方（8/7ご確認の段取り）</div>
 <table>
 <tr><th>対象</th><th>解消方法</th><th>時期</th></tr>
-<tr><td>フォルダの未割当837行・第2階層より深い情報</td><td>御社作成の<b>移行対応表（ファイルサーバー→サイト/ライブラリ/フォルダ）を「正」</b>として一括反映。二重作業を避けるため個別対応はしません</td><td>対応表の受領後、順次</td></tr>
+<tr><td><b>★構成案から補完した481本</b>（rev9に登録なし）</td><td>rev9への追加、または当社の推定でよいかのご確認をお願いします。御社作成の<b>移行対応表</b>受領時に併せて突き合わせます</td><td>対応表の受領後、順次</td></tr>
+<tr><td>第3階層より深いフォルダ</td><td>御社作成の<b>移行対応表（ファイルサーバー→サイト/ライブラリ/フォルダ）を「正」</b>として一括反映。二重作業を避けるため個別対応はしません</td><td>対応表の受領後、順次</td></tr>
 <tr><td>権限（参照）280フォルダ・606件</td><td>部署別の<b>確認シート</b>（ご記入内容→反映後の公開範囲）をお返しし、確認いただいたものから反映</td><td>説明会〜8月末</td></tr>
 <tr><td>公開範囲が未記入の4部署（管理本部・業務部・営業部・経理部）</td><td>説明会（8/12・8/18）で自部署のライブラリの公開範囲をご確認いただく</td><td>8/12〜8/18</td></tr>
 </table>
