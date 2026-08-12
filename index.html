@@ -486,13 +486,6 @@ function render(){
       <tr>
         <th class="sel"></th>
         <th onclick="menu('name')">名前 <span class="caret">▼</span></th>
-        <th onclick="menu('f')" style="position:relative">F分類 <span class="caret">▼</span>
-          ${openMenu==="f"?`<div class="colmenu">
-            <div class="cm muted">フィルター</div><div class="sep"></div>
-            <div class="cm" onclick="setF('');event.stopPropagation()">（すべて）</div>
-            ${fvals.map(v=>`<div class="cm" onclick="setF('${v}');event.stopPropagation()">${v===fF?"✓":"　"} ${v}</div>`).join("")}
-          </div>`:""}</th>
-        <th>機密レベル</th>
         <th>公開範囲</th>
         <th onclick="menu('y')" style="position:relative">年度 <span class="caret">▼</span>
           ${openMenu==="y"?`<div class="colmenu">
@@ -505,14 +498,12 @@ function render(){
       ${flds.map(fn=>`<tr class="row fld">
         <td class="sel"></td>
         <td><span class="fname"><span class="ficon" style="background:none;color:#ffb900;font-size:17px">📁</span>${fn}</span></td>
-        <td></td><td>${(v=>v?`<span class="pill pl-${v.replace("*","")}"${v.includes("*")?' style="opacity:.45" title="当社推定（rev9に機密レベルの記載がありません）"':""}>${v.replace("*","")}${v.includes("*")?"?":""}</span>`:"")(folLv(lib,fn))}</td><td class="muted">${shareTxt}</td><td class="muted"></td><td class="muted"></td>
+        <td class="muted">${shareTxt}</td><td class="muted"></td><td class="muted"></td>
         <td class="muted">7月22日</td><td class="muted">${ownerOf(lib)}</td><td></td>
       </tr>`).join("")}
       ${rows.map(f=>`<tr class="row">
         <td class="sel"></td>
         <td><span class="fname"><span class="ficon ${f[3]}">${{fx:"X",fw:"W",fp:"P",fpdf:"PDF",fmp4:"▶",fzip:"ZIP"}[f[3]]}</span>${f[2]}</span></td>
-        <td><b>${f[4]}</b></td>
-        <td><span class="pill pl-${f[5]==="—"?"X":f[5]}">${f[5]}</span></td>
         <td class="muted">${shareTxt}</td><td class="muted">${f[7]}</td><td class="muted">${f[9]||"—"}</td>
         <td class="muted">7月22日</td><td class="muted">${f[8]}</td><td></td>
       </tr>`).join("")}
@@ -575,9 +566,9 @@ const GUIDE = [
   { n:"⑥", sel:".doclist th:nth-child(3)", at:"tl",
     hlAll:".doclist th:nth-child(3),.doclist th:nth-child(4),.doclist th:nth-child(6)",
     t:"列（メタデータ）",
-    d:{A:"F分類・機密レベル・年度。▼で絞り込めます",
-       B:"F分類・機密レベル・年度。▼で絞り込めます",
-       C:"F分類・機密レベル・年度。▼で絞り込めます"} },
+    d:{A:"年度・拠点などの列。▼で絞り込めます",
+       B:"年度・拠点などの列。▼で絞り込めます",
+       C:"年度・拠点などの列。▼で絞り込めます"} },
   { n:"⑦", sel:".doclist th:nth-child(5)", at:"tl",
     t:"公開範囲",
     d:{A:"見られる部署の一覧。先頭が主管部署で、そこだけが更新できます",
