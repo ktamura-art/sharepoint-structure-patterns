@@ -286,7 +286,12 @@ function firstUsefulSite(){
   return s ? s.id : "portal";
 }
 
-let didInit = false;
+/* 外部からの参照用ディープリンク：?site=F09&lib=F09-02 で、そのサイト・ライブラリを直接開く。
+   部署別ビュー（各部署が自分のフォルダの格納先を確認する画面）からのリンク先として使う。 */
+const _QS = new URLSearchParams(location.search);
+const _qSite = _QS.get("site") || "";
+const _qLib  = (_QS.get("lib") || "").replace(/-/g, "");
+let didInit = !!_qSite;   /* ディープリンク指定時は初期化で上書きしない */
 
 function setPlan(p){
   applyPlan(p);
@@ -316,7 +321,7 @@ const PERSONA = {
   IT: { dept:"情報システム部",  kobai:false, mgr:false, exec:false, cross:true, av:"情", label:"情報システム部（L3を横断閲覧・特別権限）" },
   L5: { dept:"営業部",        kobai:true,  mgr:true,  exec:true,  av:"役", label:"執行役員（L5・個別指定）" },
 };
-let curSite="sales", curLib="", fF="", fY="", openMenu="", infoOpen=false;
+let curSite = _qSite || "sales", curLib = _qLib, fF="", fY="", openMenu="", infoOpen=false;
 
 /* 表示ユーザー：URLの ?user=ALL|L3|L4|L5 で指定。既定＝全社管理者（全部署の構造が見える）。右上アバターのクリックで切替 */
 let curPersona = (new URLSearchParams(location.search).get("user")||"ALL").toUpperCase();
@@ -394,7 +399,8 @@ function render(){
     didInit = true; curSite = firstUsefulSite(); curLib = "";
   }
   /* 開くライブラリをここで確定させる（左メニューの選択状態と注釈の位置を合わせるため） */
-  if(!LIBS.some(l=>l.site===curSite && l.key===curLib && canSee(l))){
+  if(_qLib && LIBS.some(l=>l.site===curSite && l.key===_qLib)){ curLib = _qLib; }
+  else if(!LIBS.some(l=>l.site===curSite && l.key===curLib && canSee(l))){
     const cands = LIBS.filter(l=>l.site===curSite && canSee(l));
     const pick = cands.find(l=>FILES.some(f=>f[1]===l.key))
               || cands.find(l=>((FOLDERS[curSite]||{})[l.key]||[]).length)
