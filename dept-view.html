@@ -45,7 +45,7 @@ tr.me td{background:#fff8e6!important}
 <div class="note"><b>ご確認いただきたいこと</b><br>
 ・<b>格納先が業務の感覚に合っているか</b>。合わない場合は「こちらのほうが良い」をお聞かせください<br>
 ・<b>公開範囲（閲覧できる部署）が広すぎないか、狭すぎないか</b><br>
-・<b>格納先をクリックすると、サイト設計デモの該当ライブラリが別タブで開きます</b>。同じ場所に入る他部署のフォルダも並んで見えますので、相部屋になって問題ないかもご確認ください<br>
+・<b>格納先をクリックすると、サイト設計デモの該当ライブラリが別タブで開きます</b>。デモは1つのタブを使い回すので、続けてクリックしても増えません。同じ場所に入る他部署のフォルダも並んで見えますので、相部屋になって問題ないかもご確認ください<br>
 ・<span class="b" style="background:#8a6d00">踏襲</span><span class="b" style="background:#a4262c">未割当</span>
 は<b>当社が推定した分</b>です。「要確認だけ表示」で絞り込めます。
 <span class="b" style="background:#107c10">記入</span>は構成案に中分類コードのご記入があった分で、推定は入っていません</div>
@@ -99,7 +99,7 @@ function render(){
     const ind='&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(r.d);
     const m=D.lib[r.c];
     const dest = r.c
-      ? '<a class="go" href="'+DEMO+'?site='+r.c.slice(0,3)+'&lib='+r.c+'" target="_blank" rel="noopener" title="サイト設計デモの該当ライブラリを開きます">'+(r.l5?'L5_極秘（個別）':m.site)+
+      ? '<a class="go" href="'+DEMO+'?site='+r.c.slice(0,3)+'&lib='+r.c+'" target="spodemo" rel="noopener" title="サイト設計デモの該当ライブラリを開きます（同じタブを使い回します）">'+(r.l5?'L5_極秘（個別）':m.site)+
         '<div class="sub">'+r.c+' '+m.name+' ↗</div></a>'
       : '<span style="color:#a4262c">（未割当）中分類の確認が必要</span>';
     return '<tr><td class="fn">'+ind+'📁 '+r.n+'</td><td>'+r.k+'</td>'+
