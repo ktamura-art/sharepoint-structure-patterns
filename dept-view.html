@@ -49,7 +49,7 @@ tr.me td{background:#fff8e6!important}
 … 構成案に<b>中分類コードのご記入があった分</b><br>
 ・<span class="b" style="background:#8a8886">未受領</span>
 … <b>移行対応表が未受領のため、格納先が決まっていません</b>。当社の推定は入れていません<br><br>
-・<b>構成案の権限（参照）</b> … 構成案に「誰に見せるか」をご記入いただいた分をそのまま表示しています<br><br><b>ご確認いただきたいこと</b>　格納先が業務の感覚に合っているか／公開範囲が広すぎないか狭すぎないか。
+・<b>構成案の権限（参照）</b> … 構成案に「誰に見せるか」をご記入いただいた分をそのまま表示しています<br>・<b>公開範囲の決め方</b> … <span class="b" style="background:#107c10">ご指定どおり</span><span class="b" style="background:#8a6d00">当社判断</span><span class="b" style="background:#a4262c">当社の仮置き</span> の3段階で表示しています。<b>当社の仮置きこそ、ご確認いただきたい箇所です</b><br><br><b>ご確認いただきたいこと</b>　格納先が業務の感覚に合っているか／公開範囲が広すぎないか狭すぎないか。
 格納先をクリックすると、サイト設計デモの該当ライブラリが開きます（タブは1つを使い回します）</div>
 <div class="tabs" id="tabs"></div>
 <div class="bar">
@@ -59,7 +59,7 @@ tr.me td{background:#fff8e6!important}
 </div>
 <div class="scroll"><table><thead><tr>
 <th style="width:26%">構成案のフォルダ</th><th>構成案での区分</th><th>構成案の権限（参照）</th><th>レベル</th>
-<th style="width:31%">格納先（クリックでサイト設計デモへ）</th><th>主管</th><th>根拠</th>
+<th style="width:31%">格納先（クリックでサイト設計デモへ）</th><th>主管・公開範囲</th><th>中分類の根拠</th>
 </tr></thead><tbody id="tb"></tbody></table></div>
 </div>
 
@@ -76,6 +76,9 @@ const D={"all": [{"dept": "営業部", "n": "営業部", "d": 0, "p": "営業部
 const DEMO="https://ktamura-art.github.io/sharepoint-structure-patterns/index.html";
 const LV={L2:"#0078d4",L3:"#107c10",L4:"#c55a11",L5:"#a4262c"};
 const BC={"対応表":"#107c10","構成案記入":"#1f6fb2","未受領":"#8a8886"};
+// 公開範囲（閲覧できる部署）の決め方
+const BA={"① 明示指定":"#107c10","② 構成案ベース":"#8a6d00","③ P3構成ベース":"#a4262c"};
+const SB={"① 明示指定":"公開範囲：ご指定どおり","② 構成案ベース":"公開範囲：当社判断","③ P3構成ベース":"公開範囲：当社の仮置き"};
 const BA={"① 明示指定":"#107c10","② 構成案ベース":"#8a6d00","③ P3構成ベース":"#a4262c"};
 let cur=D.order[0];
 const tabs=document.getElementById('tabs');
@@ -108,7 +111,8 @@ function render(){
     return '<tr><td class="fn">'+ind+'📁 '+r.n+'</td><td>'+r.k+'</td>'+
       '<td>'+pr+'</td>'+
       '<td>'+pill(r.lv,LV[r.lv])+'</td><td>'+dest+'</td>'+
-      '<td>'+(m?m.own:'')+'<div class="sub">'+(m?m.sh:'')+'</div></td>'+
+      '<td>'+(m?m.own:'')+'<div class="sub">'+(m?m.sh:'')+'</div>'+
+        (m&&m.basis?'<div>'+pill(SB[m.basis]||m.basis,BA[m.basis]||'#605e5c')+'</div>':'')+'</td>'+
       '<td>'+pill(r.b,BC[r.b])+'</td></tr>';
   }).join('');
 }
