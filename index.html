@@ -218,11 +218,11 @@ DATA.B = { SITES: V34.SITES, LIBS: V34.LIBS, FOLDERS: V34.FOLDERS, SHARE: V34.SH
            DESC: Object.fromEntries(V34.SITES.map(s=>[s.id, s.name.replace(/^F\d+ /,"")])) };
 delete PLANS.A; delete DATA.A;
 delete PLANS.C;
-PLANS.B = { label:"v3.5｜中分類（rev9反映）", sub:"サイト=大分類・ライブラリ=中分類",
+PLANS.B = { label:"v3.6｜中分類（構成案反映）", sub:"サイト=大分類・ライブラリ=中分類",
             sites:14, sitesAll:18, libs:V34.LIBS.length,
-            note:"各部署のフォルダ構成案と移行対応表を反映（8/19）。"
-               + "rev9に登録の無い分は各部署の構成案で補完（当社推定）。"
-               + "機密レベルはフォルダ単位。薄字の「L3?」はrev9に記載が無く当社が既定値を当てた分です" };
+            note:"各部署のフォルダ構成案と移行対応表（情報システム部・生技/品技）を反映（8/19）。"
+               + "更新者＝そのフォルダを構成案に記載した部署、主管＝業務所管部署。"
+               + "移行対応表が未受領の分は格納先が未確定のため、本デモには載せていません" };
 
 /* ====== 方式の切替 ====== */
 let curPlan = (new URLSearchParams(location.search).get("plan")||"B").toUpperCase();
