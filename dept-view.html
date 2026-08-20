@@ -79,13 +79,16 @@ const BC={"対応表":"#107c10","突合資料":"#107c10","構成案記入":"#1f6
 // 公開範囲（閲覧できる部署）の決め方
 const BA={"① 明示指定":"#107c10","② 構成案ベース":"#8a6d00","③ rev9記載ベース":"#8a6d00","④ P3構成ベース（手掛かり無し）":"#a4262c"};
 const SB={"① 明示指定":"公開範囲：ご指定どおり","② 構成案ベース":"公開範囲：当社判断","③ rev9記載ベース":"公開範囲：当社判断","④ P3構成ベース（手掛かり無し）":"公開範囲：当社の仮置き"};
-let cur=D.order[0];
+// ?dept=営業部 で直接その部署を開く（案内メールから各部署へ直リンクするため）
+const _qd=new URLSearchParams(location.search).get('dept')||'';
+let cur=D.order.includes(_qd)?_qd:D.order[0];
 const tabs=document.getElementById('tabs');
 D.order.forEach(d=>{
   const s=D.sum[d]||{}, ng=(s['確認中']||0);
   const n=D.all.filter(r=>r.dept===d).length;
   const e=document.createElement('div');
   e.className='tab'+(d===cur?' on':'');
+  if(d===cur) setTimeout(()=>e.scrollIntoView({block:'nearest',inline:'center'}),0);
   e.innerHTML=d+'<i>'+n+'件 / 確認中'+ng+'</i>';
   e.onclick=()=>{cur=d;[...tabs.children].forEach(c=>c.classList.remove('on'));e.classList.add('on');render();};
   tabs.appendChild(e);
