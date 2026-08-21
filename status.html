@@ -1,119 +1,124 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>各部署の意向の反映状況 | SharePoint 構成 v3.5</title>
-<style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>反映状況 ― 何が決まっていて、何が当社の推定か</title><style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Yu Gothic UI","Meiryo",system-ui,sans-serif;background:#faf9f8;color:#323130;font-size:14px}
-.top{background:#000;color:#fff;padding:10px 24px;display:flex;align-items:center;gap:14px}
-.top b{font-size:16px;font-weight:600}
-.top a{color:#9fd3ff;font-size:12.5px;text-decoration:none;margin-left:auto}
+body{font-family:"Yu Gothic UI","Meiryo",system-ui,sans-serif;background:#f7f7f8;color:#242424;font-size:14px;line-height:1.6}
+.top{background:#1f3564;color:#fff;padding:16px 26px}
+.top b{font-size:18px} .top span{display:block;font-size:12.5px;opacity:.85;margin-top:3px}
+.top a{color:#9fd3ff;font-size:12.5px;text-decoration:none;margin-right:16px}
 .top a:hover{text-decoration:underline}
-.wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px}
-h1{font-size:21px;font-weight:600;color:#242424;margin:6px 0 4px}
-.sub{color:#605e5c;font-size:12.5px;margin-bottom:18px;line-height:1.6}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:22px}
-.tile{background:#fff;border:1px solid #e1dfdd;border-radius:4px;padding:12px 14px}
-.tile .n{font-size:26px;font-weight:700}
-.tile .l{font-size:12px;color:#605e5c;margin-top:2px;line-height:1.4}
-.sec{font-size:15px;font-weight:600;color:#242424;margin:26px 0 8px;padding-left:10px;border-left:4px solid #0078d4}
-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e1dfdd;font-size:12.5px}
-th{background:#f3f2f1;text-align:left;padding:8px 10px;border-bottom:2px solid #e1dfdd;font-weight:600;white-space:nowrap}
-td{padding:8px 10px;border-bottom:1px solid #edebe9;vertical-align:top;line-height:1.55}
-tr:last-child td{border-bottom:none}
-.b{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:600;white-space:nowrap}
-.b1{background:#dff6dd;color:#107c10}.b2{background:#fff4ce;color:#797673}
-.b3{background:#fde7e9;color:#a4262c}.b4{background:#deecf9;color:#005a9e}
-.num{font-weight:700}
-.note{background:#fff4ce;border:1px solid #f0e3a1;border-radius:4px;padding:12px 16px;margin:18px 0;font-size:12.5px;line-height:1.7}
-.note b{color:#8a6d00}
-.gray{color:#8a8886}
-.foot{margin-top:28px;font-size:11.5px;color:#8a8886;line-height:1.7}
-@media(max-width:760px){.wrap{padding:14px}th,td{padding:6px 7px;font-size:11.5px}}
-</style>
-</head>
-<body>
-<div class="top"><b>SharePoint 構成方式の比較</b><span style="font-size:12px;color:#c8c6c4">2ページ目｜反映状況</span>
-<a href="index.html">← デモ画面へ戻る</a></div>
+.nav{margin-top:9px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 26px 60px}
+h2{font-size:15px;color:#1f3564;margin:26px 0 9px;padding-left:9px;border-left:4px solid #c55a11}
+.kpi{display:flex;gap:12px;flex-wrap:wrap}
+.kpi div{flex:1;min-width:150px;background:#fff;border:1px solid #e1e1e1;border-radius:7px;padding:12px 15px}
+.kpi b{display:block;font-size:27px;line-height:1.15;color:#1f3564}
+.kpi em{font-style:normal;font-size:12px;color:#605e5c}
+.kpi.g b{color:#107c10} .kpi.o b{color:#c55a11}
+.bar{display:flex;height:13px;border-radius:7px;overflow:hidden;background:#ececec}
+.bar i{display:block}
+.lg{display:flex;flex-wrap:wrap;gap:16px;margin:10px 0 4px;font-size:12px;color:#444}
+.lg span{display:flex;align-items:center;gap:5px}
+.lg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.lg em{font-style:normal;color:#8a8886;font-size:11px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e1e1e1;border-radius:7px;overflow:hidden}
+th{background:#1f3564;color:#fff;font-size:12px;padding:8px 10px;text-align:left;font-weight:600}
+td{border-top:1px solid #eee;padding:8px 10px;font-size:13px;vertical-align:middle}
+td.d{font-weight:600;white-space:nowrap} td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.g{color:#107c10} td.o{color:#c55a11;font-weight:600} td.x{color:#8a8886}
+td.dt{white-space:nowrap;color:#605e5c} td.sm{font-size:12px;color:#605e5c}
+.note{background:#fff8e6;border-left:4px solid #c55a11;padding:11px 15px;border-radius:0 6px 6px 0;font-size:13px;margin:10px 0}
+ul.ny{list-style:none;background:#fff;border:1px solid #e1e1e1;border-radius:7px;overflow:hidden}
+ul.ny li{border-top:1px solid #eee;padding:9px 14px;display:flex;gap:14px;align-items:baseline}
+ul.ny li:first-child{border-top:0}
+ul.ny b{min-width:290px;font-size:13px} ul.ny span{font-size:12.5px;color:#605e5c}
+@media(max-width:820px){ul.ny li{display:block} ul.ny b{display:block}}
+</style></head><body>
+<div class="top"><b>反映状況 ― 何が決まっていて、何が当社の推定か</b>
+<span>各部署のサイト構成案 1,816フォルダについて、格納先の根拠がどこにあるかを示しています</span>
+<div class="nav"><a href="index.html">▸ サイト設計デモ</a><a href="dept-view.html">▸ 部署別ビュー</a></div></div>
 <div class="wrap">
 
-<h1>各部署の意向の反映状況（設計 v3.5 時点）</h1>
-<div class="sub">各部署の文書分類・フォルダ構成案・権限のご記入が、設計v3.5とデモにどこまで反映されているかの一覧です。
-「入っていないものは入っていない」と分かるよう、未反映も含めて記載しています。｜2026-08-11 更新
-<b>（共通文書管理体系 rev9「分類（文書別）」を全面反映）</b></div>
-
-<div class="note" style="background:#e9f4eb;border-color:#b7ddc0">
-<b>■ v3.5での変更：分類データの入力元を rev9 に一本化しました。</b><br>
-v3.4までは各部署の構成案から中分類コードを個別に拾っていたため、650行しか取り込めず837行が未割当のままでした。
-rev9 に<b>全12部署・1,945行の「分類（文書別）」シート</b>が存在することが判明したため、入力をこれに一本化しています。
-<b>未割当837行は解消しました。</b>rev9 に登録の無い分だけを各部署の構成案で補完し、下表の「出所」で区別しています。</div>
-
-<div class="tiles">
-<div class="tile"><div class="n">12<span style="font-size:14px">部署</span></div><div class="l">rev9で中分類コード付与済<br>（全部署・漏れなし）</div></div>
-<div class="tile"><div class="n" style="color:#107c10">1,945<span style="font-size:14px">行</span></div><div class="l">rev9「分類（文書別）」から反映<br>（取込率100%）</div></div>
-<div class="tile"><div class="n" style="color:#107c10">1,225<span style="font-size:14px">本</span></div><div class="l">フォルダ（v3.4は715本）<br>rev9 758＋構成案補完 481</div></div>
-<div class="tile"><div class="n" style="color:#a4262c">606<span style="font-size:14px">件</span></div><div class="l">権限（参照）のご記入（280フォルダ・7部署）。<br>公開範囲へは未反映 → 確認方式で回収</div></div>
+<h2>全体</h2>
+<div class="kpi">
+<div><b>1,816</b><em>構成案のフォルダ</em></div>
+<div class="g"><b>1,495</b><em>御社の決定に基づく（82%）</em></div>
+<div class="o"><b>243</b><em>当社の推定（13%）</em></div>
+<div><b>78</b><em>確認中（デモには載せていません）</em></div>
+<div><b>1,735</b><em>デモ上のフォルダ</em></div>
 </div>
+<div class="lg"><span><i style="background:#107c10"></i>突合資料<em>御社決定</em></span><span><i style="background:#0b6a0b"></i>対応表<em>御社決定</em></span><span><i style="background:#1f6fb2"></i>構成案記入<em>御社決定</em></span><span><i style="background:#c55a11"></i>当社推定<em>当社推定</em></span><span><i style="background:#8a8886"></i>確認中<em>未確定</em></span></div>
+<div class="bar"><i style="width:54.791%;background:#107c10" title="突合資料 995"></i><i style="width:23.899%;background:#0b6a0b" title="対応表 434"></i><i style="width:3.634%;background:#1f6fb2" title="構成案記入 66"></i><i style="width:13.381%;background:#c55a11" title="当社推定 243"></i><i style="width:4.295%;background:#8a8886" title="確認中 78"></i></div>
+<div class="note"><b>オレンジの「当社推定」243件が、ご確認いただきたい箇所です。</b>
+いずれの資料にも記載が無かったため、親フォルダ・兄弟フォルダ・語句の近さから当社が当てました。
+部署別ビューではフォルダ1本ずつにオレンジのしるしを付けています。</div>
 
-<div class="sec">部署別の反映状況（rev9「分類（文書別）」より）</div>
-<table>
-<tr><th>部署（rev9表記）</th><th>rev9の登録行数</th><th>使用中分類</th><th>フォルダ</th><th>状態</th><th>権限（参照）のご記入</th><th>次のアクション</th></tr>
-<tr><td><b>管理本部</b></td><td class="num">502</td><td class="num">27</td><td class="num">169</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>公開範囲は説明会（8/12・8/18）で確認</td></tr>
-<tr><td><b>経理部</b></td><td class="num">422</td><td class="num">18</td><td class="num">101</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>同上（会計期・事業会社は列で表現）</td></tr>
-<tr><td><b>技術部（生産技術）</b></td><td class="num">186</td><td class="num">19</td><td class="num">79</td><td><span class="b b1">◎ 全反映</span></td><td class="num">52フォルダ</td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
-<tr><td><b>情報システム部</b></td><td class="num">175</td><td class="num">8</td><td class="num">21</td><td><span class="b b1">◎ 全反映</span></td><td class="num">44フォルダ</td><td>同上</td></tr>
-<tr><td><b>生産部</b></td><td class="num">171</td><td class="num">25</td><td class="num">97</td><td><span class="b b1">◎ 全反映</span></td><td class="num">53フォルダ<br><span class="gray">保全31・改善推進28・技術27 ほか</span></td><td><b>★ご記入の公開先が現在の公開範囲に未反映。</b>確認シートでご確認いただく</td></tr>
-<tr><td><b>営業部</b></td><td class="num">147</td><td class="num">12</td><td class="num">14</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>公開範囲は説明会で確認</td></tr>
-<tr><td><b>業務部</b></td><td class="num">98</td><td class="num">26</td><td class="num">24</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td>同上</td></tr>
-<tr><td><b>品質技術課</b></td><td class="num">75</td><td class="num">23</td><td class="num">72</td><td><span class="b b1">◎ 全反映</span></td><td class="gray">記入なし</td><td><b>★当社は技術部として扱っています。</b>独立した部署として権限を分けるかご確認ください</td></tr>
-<tr><td><b>ISO管理室</b></td><td class="num">55</td><td class="num">12</td><td class="num">47</td><td><span class="b b1">◎ 全反映</span></td><td class="num">39フォルダ<br><span class="gray">★7/15版で追記</span></td><td>ご記入の公開範囲を反映し、確認シートでご確認いただく</td></tr>
-<tr><td><b>購買室</b></td><td class="num">40</td><td class="num">9</td><td class="num">22</td><td><span class="b b1">◎ 全反映</span></td><td class="num">27フォルダ</td><td>同上</td></tr>
-<tr><td><b>改善推進室（WPS）</b></td><td class="num">39</td><td class="num">7</td><td class="num">27</td><td><span class="b b1">◎ 全反映</span></td><td class="num">26フォルダ<br><span class="gray">★7/15版で追記</span></td><td>同上</td></tr>
-<tr><td><b>サービス部</b></td><td class="num">35</td><td class="num">7</td><td class="num">14</td><td><span class="b b1">◎ 全反映</span></td><td class="num">39フォルダ</td><td><b>★rev9の登録が35行と少なく、配送計画・出荷準備・配送実績がrev9側に未登録です。</b>構成案で補完していますが、rev9への追加をご検討ください</td></tr>
-</table>
+<h2>部署別</h2>
+<table><tr><th>部署</th><th style="text-align:right">フォルダ</th><th style="width:34%">内訳</th>
+<th style="text-align:right">御社決定</th><th style="text-align:right">当社推定</th>
+<th style="text-align:right">確認中</th><th style="text-align:right">決定率</th></tr><tr><td class="d">管理本部</td><td class="n">673</td>
+<td><div class="bar"><i style="width:60.624%;background:#107c10" title="突合資料 408"></i><i style="width:3.120%;background:#1f6fb2" title="構成案記入 21"></i><i style="width:26.300%;background:#c55a11" title="当社推定 177"></i><i style="width:9.955%;background:#8a8886" title="確認中 67"></i></div></td>
+<td class="n g">429</td><td class="n o">177</td>
+<td class="n x">67</td>
+<td class="n"><b>63%</b></td></tr><tr><td class="d">情報システム部</td><td class="n">237</td>
+<td><div class="bar"><i style="width:0.422%;background:#107c10" title="突合資料 1"></i><i style="width:92.405%;background:#0b6a0b" title="対応表 219"></i><i style="width:6.329%;background:#1f6fb2" title="構成案記入 15"></i><i style="width:0.422%;background:#c55a11" title="当社推定 1"></i><i style="width:0.422%;background:#8a8886" title="確認中 1"></i></div></td>
+<td class="n g">235</td><td class="n o">1</td>
+<td class="n x">1</td>
+<td class="n"><b>99%</b></td></tr><tr><td class="d">技術部</td><td class="n">208</td>
+<td><div class="bar"><i style="width:0.962%;background:#107c10" title="突合資料 2"></i><i style="width:85.096%;background:#0b6a0b" title="対応表 177"></i><i style="width:13.942%;background:#c55a11" title="当社推定 29"></i></div></td>
+<td class="n g">179</td><td class="n o">29</td>
+<td class="n x">0</td>
+<td class="n"><b>86%</b></td></tr><tr><td class="d">生産部</td><td class="n">147</td>
+<td><div class="bar"><i style="width:98.639%;background:#107c10" title="突合資料 145"></i><i style="width:1.361%;background:#c55a11" title="当社推定 2"></i></div></td>
+<td class="n g">145</td><td class="n o">2</td>
+<td class="n x">0</td>
+<td class="n"><b>98%</b></td></tr><tr><td class="d">サービス部</td><td class="n">128</td>
+<td><div class="bar"><i style="width:95.312%;background:#107c10" title="突合資料 122"></i><i style="width:2.344%;background:#1f6fb2" title="構成案記入 3"></i><i style="width:2.344%;background:#c55a11" title="当社推定 3"></i></div></td>
+<td class="n g">125</td><td class="n o">3</td>
+<td class="n x">0</td>
+<td class="n"><b>97%</b></td></tr><tr><td class="d">経理部</td><td class="n">151</td>
+<td><div class="bar"><i style="width:80.795%;background:#107c10" title="突合資料 122"></i><i style="width:17.219%;background:#1f6fb2" title="構成案記入 26"></i><i style="width:1.987%;background:#c55a11" title="当社推定 3"></i></div></td>
+<td class="n g">148</td><td class="n o">3</td>
+<td class="n x">0</td>
+<td class="n"><b>98%</b></td></tr><tr><td class="d">ISO管理室</td><td class="n">70</td>
+<td><div class="bar"><i style="width:91.429%;background:#107c10" title="突合資料 64"></i><i style="width:2.857%;background:#c55a11" title="当社推定 2"></i><i style="width:5.714%;background:#8a8886" title="確認中 4"></i></div></td>
+<td class="n g">64</td><td class="n o">2</td>
+<td class="n x">4</td>
+<td class="n"><b>91%</b></td></tr><tr><td class="d">営業部</td><td class="n">61</td>
+<td><div class="bar"><i style="width:19.672%;background:#107c10" title="突合資料 12"></i><i style="width:62.295%;background:#0b6a0b" title="対応表 38"></i><i style="width:1.639%;background:#1f6fb2" title="構成案記入 1"></i><i style="width:14.754%;background:#c55a11" title="当社推定 9"></i><i style="width:1.639%;background:#8a8886" title="確認中 1"></i></div></td>
+<td class="n g">51</td><td class="n o">9</td>
+<td class="n x">1</td>
+<td class="n"><b>83%</b></td></tr><tr><td class="d">業務部</td><td class="n">56</td>
+<td><div class="bar"><i style="width:91.071%;background:#107c10" title="突合資料 51"></i><i style="width:5.357%;background:#c55a11" title="当社推定 3"></i><i style="width:3.571%;background:#8a8886" title="確認中 2"></i></div></td>
+<td class="n g">51</td><td class="n o">3</td>
+<td class="n x">2</td>
+<td class="n"><b>91%</b></td></tr><tr><td class="d">改善推進室</td><td class="n">49</td>
+<td><div class="bar"><i style="width:69.388%;background:#107c10" title="突合資料 34"></i><i style="width:24.490%;background:#c55a11" title="当社推定 12"></i><i style="width:6.122%;background:#8a8886" title="確認中 3"></i></div></td>
+<td class="n g">34</td><td class="n o">12</td>
+<td class="n x">3</td>
+<td class="n"><b>69%</b></td></tr><tr><td class="d">購買室</td><td class="n">36</td>
+<td><div class="bar"><i style="width:94.444%;background:#107c10" title="突合資料 34"></i><i style="width:5.556%;background:#c55a11" title="当社推定 2"></i></div></td>
+<td class="n g">34</td><td class="n o">2</td>
+<td class="n x">0</td>
+<td class="n"><b>94%</b></td></tr></table>
 
-<div class="note"><b>★ 部署の呼び方が2通りあります。</b><br>
-rev9では「技術(生産技術)」と「品質技術課」が別部署として登録されていますが、当社設計では<b>まとめて技術部</b>として扱っています。
-権限を分ける必要がある場合はお知らせください。同様に、rev9の「経理」「営業」「業務」「システム」は、それぞれ
-「経理部」「営業部」「業務部」「情報システム部」として扱っています。</div>
+<h2>公開範囲（誰が閲覧できるか）― 104ライブラリ</h2>
+<table><tr><th>根拠</th><th style="text-align:right">本数</th><th style="width:40%"></th><th>位置づけ</th></tr>
+<tr><td class="d">① 明示指定</td><td class="n">26</td><td><div class="bar"><i style="width:25.00%;background:#107c10"></i></div></td><td class="sm">御社決定</td></tr><tr><td class="d">② 構成案ベース</td><td class="n">69</td><td><div class="bar"><i style="width:66.35%;background:#8a6d00"></i></div></td><td class="sm">当社判断</td></tr><tr><td class="d">③ rev9記載ベース</td><td class="n">3</td><td><div class="bar"><i style="width:2.88%;background:#8a6d00"></i></div></td><td class="sm">当社判断</td></tr><tr><td class="d">④ P3構成ベース</td><td class="n">6</td><td><div class="bar"><i style="width:5.77%;background:#a4262c"></i></div></td><td class="sm">当社の仮置き</td></tr></table>
+<div class="note">公開範囲について明確なご指定をいただけているのは
+<b>104本のうち26本</b>です。構成案の「権限（参照）」欄は「部署全員」など
+自部署内の範囲を示すご記入が大半で、他部署へ開くかどうかの指定として読めるものが限られるためです。
+残りは当社の判断で置いています。</div>
 
-<div class="sec">フォルダの出所（1,225本の内訳）</div>
-<table>
-<tr><th style="width:210px">出所</th><th>本数</th><th>意味</th></tr>
-<tr><td><b>rev9「分類（文書別）」</b></td><td class="num">758</td><td>御社が中分類コードとともにご登録済み。<b>そのまま反映</b>しています</td></tr>
-<tr><td><b>★構成案からの補完</b></td><td class="num">481</td><td>rev9に登録が無いため、各部署の構成案から当社が推定して補完した分です。<span class="b b3">要確認</span></td></tr>
-</table>
-<div class="note">rev9 と構成案は<b>重複ではなく相互補完</b>の関係でした。たとえばF09-01（採用・人員計画）では、rev9側に「パート・アルバイト ＞ 技能実習生管理／申請書類管理／研修管理」、構成案側に「パート・アルバイト ＞ 媒体管理／選考管理／面接管理」があり、同じ親フォルダの別の子をそれぞれが持っています。
-一方 F13-05（庶務・社内イベント）はrev9側が0本で、構成案の28本だけが受け皿になっています。</div>
+<h2>何を根拠にしているか</h2>
+<table><tr><th>資料</th><th>受領</th><th>デモでの使い道</th><th>補足</th></tr><tr><td class="d">各部署のサイト構成案</td><td class="dt">6/18〜7/22</td><td>フォルダの階層・機密レベル・権限の記入</td><td class="sm">デモに並ぶフォルダはすべてこの資料が出どころです</td></tr><tr><td class="d">文書分類とフォルダ構成の突合</td><td class="dt">8/19</td><td>フォルダ→中分類の割り当て</td><td class="sm">8/3時点。全11部署ぶん。いま最も多くの根拠になっています</td></tr><tr><td class="d">移行対応表（移行先一覧）</td><td class="dt">8/17・8/19</td><td>フォルダ→中分類の割り当て</td><td class="sm">中分類コードがあるのは営業部・情報システム部・生技/品技の3部署のみ</td></tr><tr><td class="d">共通文書管理体系 rev9</td><td class="dt">既受領</td><td>サイト（大分類14）・ライブラリ（中分類104）の枠</td><td class="sm">公開範囲の手掛かりが他に無い3本にも使用</td></tr><tr><td class="d">SPOサイト構成設計 3パターン</td><td class="dt">7/15</td><td>公開範囲の最後の拠り所</td><td class="sm">8/7に不採用となった推奨案。手掛かりの無い6本にのみ残っています</td></tr></table>
 
-<div class="note"><b>★ 7部署の「権限（参照）」のご記入（280フォルダ・のべ606件）は、公開範囲にまだ反映していません。</b><br>
-現在の公開範囲は「そのライブラリに文書を持つ部署」から機械的に置いた暫定値です。すでにご記入いただいた内容を
-もう一度ゼロからお聞きすることはせず、「ご記入内容をこう反映します」という<b>確認形式</b>でお返しします。</div>
+<h2>まだ反映できていないこと</h2>
+<ul class="ny"><li><b>権限（更新）のご記入 665件</b><span>デモに列がありません</span></li><li><b>権限（承認）のご記入 515件</b><span>設計に器そのものがありません</span></li><li><b>会社別・拠点別・商流別の閲覧制限</b><span>8/7の決定と経理部・生産部・購買室のご要望が食い違っています</span></li><li><b>メタデータ列（分類・機密レベル・所管部署）</b><span>未設定のため、検索の絞り込みは試せません</span></li><li><b>実ファイル名</b><span>公開デモのため伏字にしています</span></li><li><b>管理本部・改善推進室の突合の続き</b><span>8/3以降に追加された分と思われます</span></li></ul>
 
-<div class="sec">ご記入いただいた公開先の内訳（のべ606件・重複除去後）</div>
-<table>
-<tr><th>種類</th><th>件数</th><th>例</th><th>設計上の受け皿</th></tr>
-<tr><td>役割</td><td class="num">194（32%）</td><td>部署全員／エリア責任者／工場責任者／課責任者</td><td>SG-L4・横断・特例の宣言リスト（器は設計済・割当はこれから）</td></tr>
-<tr><td>部署</td><td class="num">358（59%）</td><td>生産部／技術部／改善推進室／営業部</td><td>そのまま公開範囲へ反映可能</td></tr>
-<tr><td>課・室・PJ</td><td class="num">44（7%）</td><td>保全／生産管理室／安全衛生PJ</td><td>課グループを作るか、部署単位に丸めるかをご相談</td></tr>
-<tr><td>曖昧</td><td class="num">10（2%）</td><td>「関係部署」「各部」「関係者」</td><td><span class="b b3">要確認</span> 誰を指すか、ご記入部署に確認が必要</td></tr>
-</table>
-
-<div class="sec">未反映分の解消の進め方（8/7ご確認の段取り）</div>
-<table>
-<tr><th>対象</th><th>解消方法</th><th>時期</th></tr>
-<tr><td><b>★構成案から補完した481本</b>（rev9に登録なし）</td><td>rev9への追加、または当社の推定でよいかのご確認をお願いします。御社作成の<b>移行対応表</b>受領時に併せて突き合わせます</td><td>対応表の受領後、順次</td></tr>
-<tr><td>第3階層より深いフォルダ</td><td>御社作成の<b>移行対応表（ファイルサーバー→サイト/ライブラリ/フォルダ）を「正」</b>として一括反映。二重作業を避けるため個別対応はしません</td><td>対応表の受領後、順次</td></tr>
-<tr><td>権限（参照）280フォルダ・606件</td><td>部署別の<b>確認シート</b>（ご記入内容→反映後の公開範囲）をお返しし、確認いただいたものから反映</td><td>説明会〜8月末</td></tr>
-<tr><td>公開範囲が未記入の4部署（管理本部・業務部・営業部・経理部）</td><td>説明会（8/12・8/18）で自部署のライブラリの公開範囲をご確認いただく</td><td>8/12〜8/18</td></tr>
-</table>
-
-<div class="foot">
-中分類（F01-01〜F14-14）の定義は「【見直】共通文書管理体系_rev9.xlsx」に基づきます。｜本ページのデータはすべてサンプル用に匿名化した設計情報です。｜
-<a href="index.html" style="color:#0078d4">デモ画面（1ページ目）へ戻る</a>
-</div>
-</div>
-</body>
-</html>
+<h2>この画面の位置づけ</h2>
+<div class="note" style="background:#eef3fb;border-left-color:#1f3564">
+デモは<b>ご確認いただくための叩き台</b>です。決定した設計ではありません。
+とくに当社の推定と、公開範囲の当社判断は、各部署のご確認をいただいて初めて確定します。
+数字はデモの更新にあわせて自動で作り直しています。</div>
+</div></body></html>
