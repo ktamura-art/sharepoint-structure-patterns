@@ -1,0 +1,120 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>セキュリティ管理 ― 誰に何を見せるか</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Yu Gothic UI","Meiryo",system-ui,sans-serif;background:#f7f7f8;color:#242424;font-size:14px;line-height:1.6}
+.top{background:#1f3564;color:#fff;padding:16px 26px}
+.top b{font-size:18px}.top>span{display:block;font-size:12.5px;opacity:.85;margin-top:3px}
+.top a{color:#9fd3ff;font-size:12.5px;text-decoration:none;margin-right:16px}
+.top a:hover{text-decoration:underline}.nav{margin-top:9px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 26px 60px}
+h2{font-size:15px;color:#1f3564;margin:28px 0 10px;padding-left:9px;border-left:4px solid #c55a11}
+h2 span{font-weight:400;font-size:12.5px;color:#605e5c;margin-left:8px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e1e1e1;border-radius:7px;overflow:hidden}
+th{background:#1f3564;color:#fff;font-size:12px;padding:8px 10px;text-align:left;font-weight:600}
+td{border-top:1px solid #eee;padding:8px 10px;font-size:13px;vertical-align:top}
+code{font-family:"SFMono-Regular",Consolas,monospace;background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12.5px}
+.rule{background:#fff;border:1px solid #e1e1e1;border-radius:7px;padding:18px;display:flex;
+ align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.rule div{border:1.5px solid #1f3564;border-radius:6px;padding:10px 18px;text-align:center;font-size:13.5px}
+.rule b{color:#1f3564}.rule .op{font-size:22px;color:#c55a11;font-weight:700;border:0;padding:0}
+.rule .res{background:#1f3564;color:#fff;border-color:#1f3564}
+.lvl{display:flex;gap:10px;flex-wrap:wrap}
+.lvl>div{flex:1;min-width:210px;background:#fff;border:1px solid #e1e1e1;border-top-width:4px;border-radius:7px;padding:11px 14px}
+.lvl h3{font-size:15px;margin-bottom:2px}.lvl .k{font-size:12px;color:#605e5c}
+.lvl p{font-size:12.5px;margin-top:6px}.lvl .n{font-size:12px;color:#8a8886;margin-top:6px}
+.ops{display:flex;gap:10px;flex-wrap:wrap}
+.ops>div{flex:1;min-width:230px;background:#fff;border:1px solid #e1e1e1;border-radius:7px;padding:11px 14px}
+.ops h3{font-size:14px;color:#1f3564}.ops .k{font-size:12px;color:#605e5c;margin-bottom:5px}
+.ops ul{margin-left:16px;font-size:12.5px}.ops li{margin-bottom:3px}
+ul.plain{list-style:none;background:#fff;border:1px solid #e1e1e1;border-radius:7px;overflow:hidden}
+ul.plain li{border-top:1px solid #eee;padding:9px 14px;display:flex;gap:14px;align-items:baseline}
+ul.plain li:first-child{border-top:0}
+ul.plain b{min-width:280px;font-size:13px}ul.plain span{font-size:12.5px;color:#605e5c}
+.note{background:#fff8e6;border-left:4px solid #c55a11;padding:11px 15px;border-radius:0 6px 6px 0;font-size:13px;margin:10px 0}
+.note.b{background:#eef3fb;border-left-color:#1f3564}
+.y{color:#a4262c;font-weight:700}.n2{color:#107c10;font-weight:700}
+.stack div{background:#fff;border:1px solid #e1e1e1;border-radius:7px;padding:11px 15px;margin-bottom:7px}
+.stack b{color:#1f3564}.stack .who{float:right;font-size:11.5px;background:#eef3fb;color:#1f3564;
+ padding:2px 9px;border-radius:9px}
+.stack .me{background:#fdf2e9;color:#c55a11}
+.stack p{font-size:12.5px;color:#605e5c;margin-top:3px}
+@media(max-width:820px){ul.plain li{display:block}ul.plain b{display:block}}
+</style></head><body>
+<div class="top"><b>セキュリティ管理 ― 誰に、何を見せるか</b>
+<span>権限の考え方・グループ構成・運用の流れ。サイト設計デモの裏側にある仕組みです</span>
+<div class="nav"><a href="index.html">▸ サイト設計デモ</a><a href="dept-view.html">▸ 部署別ビュー</a>
+<a href="status.html">▸ 反映状況</a></div></div>
+<div class="wrap">
+
+<h2>見える条件はこれだけ<span>個人ごとの出し分けはせず、2つの軸だけで決めます</span></h2>
+<div class="rule">
+<div>自分の部署が<br><b>公開範囲に入っている</b></div><div class="op">×</div>
+<div>自分のレベルが<br><b>その文書のレベル以上</b></div><div class="op">=</div>
+<div class="res"><b style="color:#fff">見える</b></div></div>
+<div class="note">公開範囲はライブラリ（中分類）ごと、機密レベルはフォルダごとに設定します。
+拠点・商流などの列は検索と集計のためのもので、<b>閲覧の制限には使いません。</b>
+見せたくないものは「レベルを上げる」「L5へ移す」で対応します。</div>
+
+<h2>機密レベル<span>現在のデモでの内訳</span></h2>
+<div class="lvl">
+<div style="border-top-color:#107c10"><h3 style="color:#107c10">L2 全社共有</h3><div class="k">規程・様式・通達</div><p>各サイトに1本の「L2_全社共有」ライブラリ</p><div class="n">デモ上のフォルダ 177 本</div></div><div style="border-top-color:#0078d4"><h3 style="color:#0078d4">L3 既定</h3><div class="k">通常の業務文書</div><p>中分類ライブラリの既定。所管部署＋公開範囲の部署</p><div class="n">デモ上のフォルダ 1,310 本</div></div><div style="border-top-color:#c55a11"><h3 style="color:#c55a11">L4 限定</h3><div class="k">人事・給与・原価など</div><p>そのフォルダだけ継承を切る。ライブラリは分けない</p><div class="n">デモ上のフォルダ 238 本</div></div><div style="border-top-color:#a4262c"><h3 style="color:#a4262c">L5 極秘</h3><div class="k">役員報酬・訴訟・事故</div><p>別サイトを個別に作成。対象者以外には存在も見えない</p><div class="n">案件ごとに作成</div></div>
+</div>
+<div class="note">L4はフォルダ単位で継承を切ります。<b>ライブラリをレベルごとに分けることはしません。</b>
+104本が300本以上に増え、同じ中分類の書類が分断されるためです。
+ただし固有の権限を持つフォルダが増えすぎると管理が破綻するため、
+1ライブラリあたり数十本を目安とし、超える場合はライブラリ分割を検討します。</div>
+
+<h2>セキュリティグループ<span>アカウントをグループへ、グループをライブラリへ割り当てます</span></h2>
+<table><tr><th style="width:21%">グループ名</th><th style="width:11%">種別</th><th style="width:10%">権限</th><th style="width:48%">誰が入るか</th><th style="width:7%">本数</th></tr><tr><td><code>DG-ORG-全社</code></td><td>動的</td><td>閲覧</td><td>全社員。全社共有（L2）用</td><td><b>1</b></td></tr><tr><td><code>DG-ORG-{部署}</code></td><td>動的</td><td>投稿／閲覧</td><td>その部署の全員。主管するライブラリでは投稿、公開範囲に入るライブラリでは閲覧</td><td><b>11</b></td></tr><tr><td><code>SG-ACC-L4</code></td><td>Assigned</td><td>閲覧／投稿</td><td>次長クラス以上（宣言リスト）。全社1本</td><td><b>1</b></td></tr><tr><td><code>SG-ACC-L5-{案件}</code></td><td>Assigned</td><td>個別</td><td>執行役員＋案件の指定者。事前に作らない</td><td><b>都度</b></td></tr><tr><td><code>SG-ACC-横断-L3</code></td><td>Assigned</td><td>閲覧</td><td>原則自部署のため、横断が要る部署をここで指定</td><td><b>1〜2</b></td></tr><tr><td><code>SG-ACC-{用途}</code></td><td>Assigned</td><td>投稿</td><td>購買兼任の横串・監査などの特例</td><td><b>少数</b></td></tr><tr><td><code>RAG-ADM-*</code></td><td>role-assignable</td><td>管理</td><td>テナント管理用。文書のアクセス権とは別に管理されます</td><td><b>―</b></td></tr></table>
+<div class="note">DG＝動的（人事属性から自動で出入りが反映）／SG-ACC＝Assigned（宣言リストで管理）／
+RAG-ADM＝Entraロール割当用。<b>人への直接付与は原則行いません。</b>
+部署グループは Member／Viewer の2本立てをやめ1本に統合しています。
+同じ人が入るグループを2つ持つ必要はなく、ライブラリ側で投稿／閲覧を割り当て分ければ足りるためです。</div>
+
+<h2>運用の流れ</h2>
+<div class="ops">
+<div><h3>① 作成</h3><div class="k">新しいグループが必要になったとき</div><ul><li>申請は部署長から情報システム部へ</li><li>命名規則に従う（DG-ORG／SG-ACC）</li><li>個人への直接付与は原則不可</li></ul></div><div><h3>② 割り当て</h3><div class="k">誰をどのグループに入れるか</div><ul><li>部署グループは人事属性から自動</li><li>判定に使う属性は人事側を正本とし、本人は変更できないようにする</li><li>L4・横断・特例は宣言リストで手動</li></ul></div><div><h3>③ 見直し</h3><div class="k">ずれていないかを確認する</div><ul><li>年1回の棚卸し（4月の異動後）</li><li>手動グループは半年ごとに宣言リストを再確認</li><li>アクセスレビューの対象に含める</li></ul></div><div><h3>④ 削除</h3><div class="k">使わなくなったとき</div><ul><li>L5案件は終了時に通常レベルへ戻す</li><li>PJは完了時に解散し、文書は帰属先へ</li><li>グループだけ残すと権限が幽霊化します</li></ul></div>
+</div>
+
+<h2>よくある場面と、やること</h2>
+<ul class="plain">
+<li><b>新入社員が入った</b><span style="color:#107c10">何もしない（名簿更新で自動反映）</span></li><li><b>部署を異動した</b><span style="color:#107c10">何もしない（名簿更新で自動反映）</span></li><li><b>次長に昇進した</b><span style="color:#242424">SG-ACC-L4 の宣言リストに追加（部署長 → 情報システム部）</span></li><li><b>極秘案件が始まった</b><span style="color:#242424">SG-ACC-L5-{案件} をその時に作成・指名（事前に作らない）</span></li><li><b>1人だけに見せたい事情がある</b><span style="color:#c55a11">例外として可能。期限・台帳記録・半年棚卸し・部署長承認の4条件付き</span></li>
+</ul>
+
+<h2>できないこと<span>あらかじめご理解をお願いします</span></h2>
+<ul class="plain">
+<li><b>見えるがダウンロードは不可</b><span>SharePointの標準権限では実現できません。別ライセンスが必要です</span></li><li><b>個人単位での細かな出し分け</b><span>グループ単位が原則です。個人付与は運用が破綻します</span></li><li><b>この1ファイルだけ隠す</b><span>ファイル単位の権限は使いません。レベルを上げるかL5へ移します</span></li><li><b>Copilotにだけ見せない</b><span>人が見えるものはCopilotも見えます。同じ権限で動くためです</span></li><li><b>列（メタデータ）で閲覧を制限する</b><span>分類・拠点・商流などの列は検索と集計のためのものです。権限は制御できません</span></li>
+</ul>
+
+<h2>Copilotが見に行く範囲</h2>
+<div class="note b"><b>Copilotは「その人が開ける文書」しか読みません。</b>
+同じ質問をしても、営業部の人とサービス部の人では返ってくる答えが変わります。
+権限を広げると回答範囲も広がるため、公開範囲の設計がそのままCopilotの精度と安全性になります。<br><br>
+運用開始後によく出る質問は2つです。「Copilotに出てこない」＝その文書の公開範囲に自部署が入っていない。
+「見えてはいけないものが出てきた」＝公開範囲が広すぎるか、レベルの設定が低すぎる。
+どちらも原因は権限の設計です。</div>
+
+<h2>3つの層<span>この画面が扱うのは最下段だけです</span></h2>
+<div class="stack">
+<div><span class="who">情報システム部の設計案</span><b>管理プレーン</b>　Entra ID 管理ロール
+<p>誰がテナントとサービスを管理できるか。PIM・緊急アクセスアカウント・管理単位・職務分離</p></div>
+<div><span class="who me">接続点</span><b>アクセス橋渡し</b>　セキュリティグループ／Microsoft 365 グループ
+<p>誰がどのリソースにアクセスできるか。命名規則・動的とAssignedの別・グループの棚卸し</p></div>
+<div><span class="who me">この画面</span><b>データアクセスプレーン</b>　サイト／ライブラリ／フォルダの権限
+<p>どの文書を、どの部署に、どのレベルで見せるか</p></div>
+</div>
+<div class="note">2つの設計書は競合しません。上下に積み重なる関係です。
+接続点はグループで、命名規則（DG-ORG／SG-ACC／RAG-ADM）に文書アクセス用グループを載せています。</div>
+
+<h2>Entra ID のライセンス<span>「使う人」ではなく「対象になる人」に必要です</span></h2>
+<table><tr><th style="width:38%">機能</th><th style="width:44%">ライセンスが必要な人</th><th style="width:18%">全員必要か</th></tr><tr><td>条件付きアクセス</td><td>ポリシーの対象になる全ユーザー</td><td><span class="y">必要</span></td></tr><tr><td>動的グループ</td><td>そのグループのメンバー全員</td><td><span class="y">必要</span></td></tr><tr><td>セルフサービスパスワードリセット（AD書き戻し）</td><td>利用する全ユーザー</td><td><span class="y">必要</span></td></tr><tr><td>グループ・サイトの作成制限</td><td>設定する管理者＋作成を許可するグループのメンバー</td><td><span class="n2">一部</span></td></tr><tr><td>管理単位（AU）</td><td>管理者のみ</td><td><span class="n2">一部</span></td></tr></table>
+<div class="note"><b>Office 365 E3 に Entra ID P1 は含まれません。</b>Microsoft 365 E3 には含まれます。
+サイト作成の統制だけなら十数名分で足りますが、動的グループを使うと対象メンバー全員分が必要になります。</div>
+
+<h2>ご判断をお願いしたいこと</h2>
+<ul class="plain">
+<li><b style="color:#c55a11">L4以上のフォルダの分離先</b><span>L4は現在238フォルダあります。個別に権限を切る／別ライブラリへ分ける／高機密サイトへ分離する、の3案からご選択ください</span></li><li><b style="color:#c55a11">サイト作成の統制</b><span>SharePoint管理センターの「サイトの作成」とMicrosoft 365グループの作成制限で補完します。作成を許可する範囲を決めていただく必要があります</span></li><li><b style="color:#c55a11">Entra ID のライセンス</b><span>動的グループとAUにP1が必要です。Office 365 E3にP1は含まれません。無い場合は部署グループを人手で維持することになり、運用設計から組み直しになります</span></li>
+</ul>
+<div class="note b">この3点がはっきりすれば、検証サイトで実際の権限の動きをお見せできます。</div>
+</div></body></html>

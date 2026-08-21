@@ -393,7 +393,7 @@ function render(){
       return `<div class="pb ${k===curPlan?"on":""}" onclick="setPlan('${k}')">`+
              `<b>${m.label}</b><em>${m.sitesAll}サイト（業務${m.sites}）／ ${m.libs}ライブラリ</em></div>`;
     }).join("") +
-    `<a class="pb-link" href="status.html">反映状況 →</a>` +
+    `<a class="pb-link" href="status.html">反映状況 →</a><a class="pb-link" href="security.html">セキュリティ管理 →</a>` +
     `<span class="pb-note">${PLANS[curPlan].note}</span>`;
 
   /* 初回表示と、方式切替でサイトIDが変わったときは、その人が使えるサイトへ寄せる */
